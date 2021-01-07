@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.newcoder01.dao.DiscussPostMapper">
+    <resultMap id="DiscussPostMap" type="com.example.newcoder01.entity.Discuss_post">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="user_id" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="create_time" property="create_time" jdbcType="TIMESTAMP"/>
+        <result column="comment_count" property="comment_count" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="selectFields">
+        id,user_id,title,content,`type`,status,create_time,comment_count,score
+    </sql>
+    <select id="selectDiscussPostByUid" resultType="Discuss_post">
+        select * from discuss_post
+        <where>
+            user_id = #{user_id}
+        </where>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+    <select id="selectDiscussPost" resultMap="DiscussPostMap">
+        select <include refid="selectFields"></include>
+        from discuss_post where status != 2
+        <if test="userId != 0">
+            and user_id = #{userId}
+        </if>
+        order by type desc,create_time desc
+        limit #{offset},#{limit}
+    </select>
+    <select id="selectCount" resultType="java.lang.Integer">
+        select count(id)
+        from discuss_post
+        <where>
+            user_id = #{user_id}
+        </where>
+    </select>
+    <select id="selectAll" resultMap="DiscussPostMap">
+        select <include refid="selectFields"></include>
+        from discuss_post where status != 2
+        order by type desc,create_time desc
+        limit #{offset},#{limit}
+    </select>
+</mapper>

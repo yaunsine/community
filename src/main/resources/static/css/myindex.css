@@ -1,0 +1,67 @@
+body{
+    background-color: #eeeeee;
+}
+.top{
+    background-color: #1a1919ea;
+    height: 54px;
+    color: white;
+}
+.la{
+    color: rgba(255, 255, 255);
+    text-decoration: none;
+    float: left;
+}
+a:hover{
+    text-decoration: underline;
+    color: #fff;
+}
+.nowcoder-navbar{
+    display: block;
+    list-style: none;
+    float: left;
+}
+.nowcoder-navbar li{
+    display: list-item;
+    float: left;
+}
+.nowcoder-navbar li a{
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: 20px;
+}
+.page{
+    margin-top: 50px;
+    margin-left: 150px;
+    margin-right: 150px;
+    margin-bottom: 50px;
+    background-color: white;
+    padding: 10px;
+}
+.submit-btn{
+    float: right;
+}
+.time-for-submit{
+    float: left;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.like-it{
+    float: right;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+.my-card{
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    padding: 10px;
+}
+.nav-my-pager{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    justify-content: center;
+}
+.img-circle{
+    border-radius: 50%;
+}

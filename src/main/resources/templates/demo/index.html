@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Title</title>
+    <script src="/community/js/bootstrap.js"></script>
+    <script src="/community/js/bootstrap.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-3.5.1.js}"></script>
+    <link rel="stylesheet" href="/community/css/bootstrap.css">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/myindex.css}">
+</head>
+<style>
+
+</style>
+<body>
+    <div class="top">
+        <a class="la" href="#">程序博客</a>
+        <ul class="nowcoder-navbar">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">消息</a></li>
+            <li><a href="#">注册</a></li>
+            <li><a href="#">登录</a></li>
+        </ul>
+    </div>
+    <div class="page">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">最新</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">最热</a>
+            </li>
+            <li class="col-lg-10">
+                <button type="button" class="btn btn-primary submit-btn">我要发布</button>
+            </li>
+          </ul>
+
+
+          <div class="card my-card col-mb-12 " th:each="map:${discussPosts}">
+            <div class="row no-gutters col-mb-12">
+              <div class="col-md-1">
+                <img th:src="${map.user.header_url}" class="card-img img-thumbnail img-circle"  width="150" height="auto">
+              </div>
+              <div class="col-md-10">
+                <div class="card-body">
+                  <p>
+                    <h5 class="card-title" th:text="${map.post.title}"></h5><br/>
+                    <h5 class="card-title" th:text="${map.user.username}"></h5>
+                  </p>
+                  <p class="card-text">
+                      <small class="text-muted col-lg-8 time-for-submit">发布于<text th:text="${map.user.create_time}"></text></small>
+                      <small class="text-muted col-lg-4 like-it">点赞 | 20 回帖 | 4</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!--分页-->
+        <nav aria-label="Page navigation example" th:if="${page.rows > 0}">
+            <ul class="pagination nav-my-pager">
+                <li class="page-item">
+                    <a class="page-link" th:href="@{${page.path}(current = 1)}" aria-label="Previous">
+                        <span aria-hidden="true">首页</span>
+                    </a>
+                </li>
+                <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                    <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}" aria-label="Previous">&laquo;</a>
+                </li>
+                <li th:class="|page-item ${page.current==index?'active':''}|" th:each="index:${#numbers.sequence(page.from,page.to)}">
+                    <a class="page-link" th:href="@{${page.path}(current=${index})}" th:text="${index}">1</a>
+                </li>
+                <li th:class="|page-item ${page.current==page.total?'disabled':''}|" >
+                    <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}" aria-label="Next">&raquo;</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" th:href="@{${page.path}(current=${page.total})}" aria-label="Previous">
+                        <span aria-hidden="true">末页</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
